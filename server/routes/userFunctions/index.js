@@ -27,6 +27,32 @@ router.post("/add", (req, res) => {
 
         res.status(200).send("Usuário cadastrado com sucesso.");
     })
-})
+});
+
+// Remover usuário existente
+router.delete("/remove", (req, res) => {
+    const username = 'ygor';
+
+    const queryDeleteChildren = `DELETE FROM user_preferences WHERE username = ?`;
+    const queryDeleteDad = `DELETE FROM user WHERE username = ?`;
+
+    db.query(queryDeleteChildren, [username], (err1, res1) => {
+        if (err1) {
+            res.status(500).send("Ocorreu um erro interno do servidor.");
+            console.log(err1);
+            return;
+        }
+
+        db.query(queryDeleteDad, [username], (err2, res2) => {
+            if (err2) {
+                res.status(500).send("Ocorreu um erro interno do servidor.");
+                console.log(err2);
+                return;
+            }
+
+            res.status(200).send("Usuário removido com sucesso.");
+        })
+    })
+});
 
 module.exports = router;
