@@ -8,6 +8,8 @@ const cors = require("cors");
 const app = express();
 
 // Importando rotas
+
+// Importando rotas
 const getCryptoPrice = require("./routes/getCryptoPrice");
 const insertCrypto = require("./routes/insertCrypto");
 const userFunctions = require("./routes/userFunctions");
