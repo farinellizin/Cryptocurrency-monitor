@@ -14,7 +14,7 @@ const url = 'https://rest.coinapi.io/v1/exchangerate/';
 
 // Consumir API
 router.get("/getCryptoPrice", (req, res) => {
-    const username = 'farinellizin';
+    const username = req.query.username;
     const responseArray = [];
 
     const query = `SELECT coin FROM user_preferences WHERE username = ?`;
@@ -34,6 +34,7 @@ router.get("/getCryptoPrice", (req, res) => {
                     }
                 });
 
+                console.log(response)
                 responseArray.push(response.data.rate);
             } catch (error) {
                 console.log(error);

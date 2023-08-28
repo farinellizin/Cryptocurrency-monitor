@@ -9,7 +9,7 @@ const db = require("../../config/database").databaseConnection;
 
 // Adicionar novo usuário
 router.post("/add", (req, res) => {
-    const username = 'ygor'
+    const username = req.body.username;
 
     const query = `INSERT INTO user (username) VALUES (?)`;
 
@@ -25,13 +25,13 @@ router.post("/add", (req, res) => {
             return;
         }
 
-        res.status(200).send("Usuário cadastrado com sucesso.");
+        res.status(200).redirect('/');
     })
 });
 
 // Remover usuário existente
-router.delete("/remove", (req, res) => {
-    const username = 'ygor';
+router.post("/remove", (req, res) => {
+    const username = req.body.username;
 
     const queryDeleteChildren = `DELETE FROM user_preferences WHERE username = ?`;
     const queryDeleteDad = `DELETE FROM user WHERE username = ?`;
@@ -50,7 +50,7 @@ router.delete("/remove", (req, res) => {
                 return;
             }
 
-            res.status(200).send("Usuário removido com sucesso.");
+            res.status(200).redirect('/');
         })
     })
 });

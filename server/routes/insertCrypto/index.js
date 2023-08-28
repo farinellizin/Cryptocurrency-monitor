@@ -9,8 +9,8 @@ const db = require("../../config/database").databaseConnection;
 
 // Adicionando Criptomoeda a rede de monitoramento
 router.post("/addNewCrypto", (req, res) => {
-    const username = 'farinellizin';
-    const coin = 'BNB';
+    const username = req.body.username;
+    const coin = req.body.coin;
 
     const queryVerifyUser = `SELECT username FROM user WHERE username = ?`;
     const queryNewCrypto = `INSERT INTO user_preferences (username, coin) VALUES (?, ?)`;
@@ -32,7 +32,7 @@ router.post("/addNewCrypto", (req, res) => {
                     return;
                 }
 
-                res.status(200).send("Criptomoeda adicionada com sucesso.");
+                res.status(200).redirect('/');
             })
 
         } else {
