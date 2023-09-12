@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS cryptoMonitor;
+USE cryptoMonitor;
+
+CREATE TABLE IF NOT EXISTS user (
+	username VARCHAR(16) PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS user_preferences (
+	username VARCHAR(16) NOT NULL,
+	coin VARCHAR(4) NOT NULL,
+	CONSTRAINT FOREIGN KEY (username) REFERENCES user (username)	
+);
